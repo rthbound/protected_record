@@ -13,7 +13,7 @@ module ProtectedRecord
         # Include this in AR models only
         return unless base.ancestors.include?(ActiveRecord::Base)
 
-        base.has_many :change_log_records, class_name: "ChangeLog::Record"
+        base.has_many :change_log_records, class_name: "ProtectedRecord::ChangeLog::Record"
       end
     end
 
@@ -23,7 +23,7 @@ module ProtectedRecord
         # Include this in AR models only
         return unless base.ancestors.include?(ActiveRecord::Base)
 
-        base.has_many :change_log_records, as: :recordable, class_name: "ChangeLog::Record"
+        base.has_many :change_log_records, as: :recordable, class_name: "ProtectedRecord::ChangeLog::Record"
       end
     end
   end
