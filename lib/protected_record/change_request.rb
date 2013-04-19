@@ -1,7 +1,7 @@
 module ProtectedRecord
   module ChangeRequest
     class Record < ActiveRecord::Base
-      self.table_name = 'change_request_records'
+      self.table_name = "protected_record_change_request_records"
       attr_accessible :recordable, :user
 
       belongs_to :recordable, polymorphic: true
