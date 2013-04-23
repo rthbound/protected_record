@@ -1,3 +1,4 @@
+require 'active_record'
 module ProtectedRecord
   module ChangeRequest
     class Record < ActiveRecord::Base

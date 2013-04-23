@@ -1,3 +1,4 @@
+require 'active_record'
 module ProtectedRecord
   module ChangeLog
     class Record < ActiveRecord::Base
