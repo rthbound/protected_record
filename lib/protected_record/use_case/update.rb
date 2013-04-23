@@ -18,9 +18,9 @@ module ProtectedRecord
 
         # We are successful if all changes have been applied
         if !@protected_record.changes.present?
-          return UseCase::Result.new(data: { updated: @protected_record })
+          return PayDirt::Result.new(data: { updated: @protected_record }, success: true)
         else
-          return UseCase::Result.new({
+          return PayDirt::Result.new({
             data: { remaining_changes: @protected_record.changes },
             success: false
           })
@@ -63,7 +63,7 @@ module ProtectedRecord
       def log_changes
         log_result = @change_log.new(user: @user, changed_object: @protected_record).execute!
 
-        result.successful? ? return : raise
+        log_result.successful? ? return : raise
       end
 
       protected

@@ -3,13 +3,15 @@ module ProtectedRecord
     module ChangeFilter
       class Create < PayDirt::Base
         def initialize(options)
-          load_options(:protected_keys, :protected_record, options) and validate_state
+          load_options(:protected_keys, :protected_record, options)
         end
 
         def execute!
-          revert_protected_attrs
+          if @protected_record.changes.present?
+            revert_protected_attrs
+          end
 
-          return PayDirt::Result.new(data: { change_request_record: @protected_record })
+          return PayDirt::Result.new(data: { change_request_record: @protected_record }, success: true)
         end
 
         private
@@ -18,14 +20,6 @@ module ProtectedRecord
             if @protected_record.send("#{key.to_s}_changed?")
               @protected_record.send("#{key.to_s}=", @protected_record.send("#{key.to_s}_was"))
             end
-          end
-        end
-
-        protected
-        def validate_state
-          # If there are no changes, there's no need to do any filtering
-          if !@protected_record.changes.present?
-            raise ActiveRecord::ActiveRecordError.new(':protected_record not dirty')
           end
         end
       end

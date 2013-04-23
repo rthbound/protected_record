@@ -1,3 +1,4 @@
+require 'pry'
 module ProtectedRecord
   module UseCase
     module ChangeRequest
@@ -7,7 +8,7 @@ module ProtectedRecord
             record_class: ::ProtectedRecord::ChangeRequest::Record
           }.merge!(options) if !options.has_key?(:record_class)
 
-          load_options(:protected_keys, :record_class, :user, :protected_record, options) and validate_state
+          load_options(:protected_keys, :record_class, :user, :protected_record, options)
         end
 
         def execute!
@@ -16,7 +17,7 @@ module ProtectedRecord
           initialize_change_request_record
 
           if @record.save
-            return PayDirt::Result.new(data: { change_request_record: @record })
+            return PayDirt::Result.new(data: { change_request_record: @record }, success: true)
           else
             return PayDirt::Result.new(data: { change_request_record: @record }, success: false)
           end
@@ -31,7 +32,7 @@ module ProtectedRecord
         end
 
         def requested_changes
-          @dirty_object.changes.select do |key|
+          @protected_record.changes.select do |key|
             @protected_keys.map(&:to_s).include? key.to_s
           end
         end
@@ -45,15 +46,6 @@ module ProtectedRecord
 
           raise if @protected_keys.any? { |key| @protected_record.send("#{key}_changed?") }
         end
-
-        protected
-        def validate_state
-          # If there are no changes, there's no need to make a request
-          if !@dirty_object.changes.present?
-            raise ActiveRecord::ActiveRecordError.new(':dirty_object not dirty')
-          end
-        end
-
       end
     end
   end

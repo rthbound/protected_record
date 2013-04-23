@@ -7,14 +7,17 @@ module ProtectedRecord
             record_class: ::ProtectedRecord::ChangeLog::Record
           }.merge!(options) if !options.has_key?(:record_class)
 
-          load_options(:record_class, :user, :changed_object, options) and validate_state
+          load_options(:record_class, :user, :changed_object, options)
         end
 
         def execute!
+          if !@changed_object.previous_changes.present?
+            return PayDirt::Result.new(data: { change_log_record: @record }, success: true)
+          end
           initialize_change_log_record
 
           if @record.save
-            return PayDirt::Result.new(data: { change_log_record: @record })
+            return PayDirt::Result.new(data: { change_log_record: @record }, success: true)
           else
             return PayDirt::Result.new(data: { change_log_record: @record }, success: false)
           end
@@ -26,14 +29,6 @@ module ProtectedRecord
           @record.user              = @user
           @record.recordable        = @changed_object
           @record.observed_changes  = ActiveSupport::JSON.encode(@changed_object.previous_changes)
-        end
-
-        protected
-        def validate_state
-          # What are we doing here, if not logging a change that has already happened?
-          if !@changed_object.previous_changes.present?
-            raise ActiveRecord::ActiveRecordError.new(':changed_object has no previous_changes')
-          end
         end
       end
     end
