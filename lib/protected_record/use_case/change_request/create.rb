@@ -1,4 +1,3 @@
-require 'pry'
 module ProtectedRecord
   module UseCase
     module ChangeRequest

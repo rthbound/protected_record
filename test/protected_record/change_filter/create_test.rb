@@ -1,6 +1,5 @@
 require "minitest_helper"
 require "active_record"
-require "pry"
 
 describe ProtectedRecord::UseCase::ChangeFilter::Create do
   describe "new" do
