@@ -1,6 +1,6 @@
 # protected_record
 ## Setup for rails applications
-I've created an engine to provide the necessary migrations as well as a basic interface for traiging change requests.  You are free to use this gem without the engine, but you'll need to visit [protected_record_manager](https://github.com/rthbound/protected_record_manager/tree/master/db/migrate) and copy the migrations into your app manually.
+I've created an engine to provide the necessary migrations as well as a basic interface for triaging change requests.  You are free to use this gem without the engine, but you'll need to visit [protected_record_manager](https://github.com/rthbound/protected_record_manager/tree/master/db/migrate) and copy the migrations into your app manually.
 
 Add to your Rails application's Gemfile:
 
