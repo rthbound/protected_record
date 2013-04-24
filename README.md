@@ -44,6 +44,12 @@ include ProtectedRecord::ChangeLog::Changeling
 4. **Important**: ProtectedRecord is opt-in only. It does not change the way behavior of any AR methods, nor does it use any callbacks. In order to update with protection, use the following: 
 
 ```ruby
+# UseCase module will filter changes to protected_keys,
+# creating a "change request" rather than applying changes
+
+# UseCase module will allow other changes to be applied,
+# creating a "change log" entry for the observed changes
+
 result = ProtectedRecord::UseCase::Update.new({
   params: record_params,
   protected_record: @record,
@@ -51,12 +57,7 @@ result = ProtectedRecord::UseCase::Update.new({
   protected_keys: %w{ do_not_resuscitate organ_donor }
 }).execute!
 
-# UseCase module will filter changes to protected_keys,
-# creating a "change request" rather than applying changes
-
-# UseCase module will allow other changes to be applied,
-# creating a "change log" entry for the observed changes
-update_result.successful? #=> true
+result.successful? #=> true
 ```
 and call methods like
 ```ruby
