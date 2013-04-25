@@ -5,7 +5,7 @@
 I've created an engine to provide the necessary migrations as well as a (very)
 basic interface for triaging `ProtectedRecord::ChangeRequest::Record` objects.
 You are free to use this gem without the engine, but you'll need to
-[grab these](//github.com/rthbound/protected_record_manager/tree/master/db/migrate).
+[grab these](https://github.com/rthbound/protected_record_manager/tree/master/db/migrate).
 
 ### Your models
 
@@ -15,7 +15,7 @@ There's **two types** of models at play here:
 1. User (for now I expect a `User` class and `current\_user` method
 2. Your records .. these are the models you want to track
 
-So, in your models
+So, in your models add `require "protected_record"`
 
 ```ruby
 # app/models/user.rb
