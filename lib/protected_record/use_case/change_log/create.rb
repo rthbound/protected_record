@@ -1,3 +1,5 @@
+require "json"
+
 module ProtectedRecord
   module UseCase
     module ChangeLog
@@ -28,7 +30,7 @@ module ProtectedRecord
           @record                   = @record_class.new
           @record.user              = @user
           @record.recordable        = @changed_object
-          @record.observed_changes  = ActiveSupport::JSON.encode(@changed_object.previous_changes)
+          @record.observed_changes  = JSON.generate(@changed_object.previous_changes)
         end
       end
     end
