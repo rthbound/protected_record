@@ -12,7 +12,7 @@ You are free to use this gem without the engine, but you'll need to
 Prepare your models.
 There's **two types** of models at play here:
 
-1. User (for now I expect a `User` class and `current\_user` method
+1. User (for now I expect a `User` class and `current_user` method
 2. Your records .. these are the models you want to track
 
 So, in your models add `require "protected_record"`
