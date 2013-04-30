@@ -4,42 +4,6 @@ require "active_record"
 describe ProtectedRecord::UseCase::ChangeFilter::Create do
   describe "new" do
     before do
-      class TestCase
-        include ActiveModel::Dirty
-
-        define_attribute_methods [:knowledge, :power]
-
-        def knowledge
-          @knowledge
-        end
-
-        def power
-          @power
-        end
-
-        def knowledge=(val)
-          knowledge_will_change! unless val == @knowledge
-          @knowledge = val
-        end
-
-        def power=(val)
-          power_will_change! unless val == @power
-          @power = val
-        end
-
-        def save
-          @previously_changed = changes
-          @changed_attributes.clear
-        end
-
-        def initialize(attributes = {})
-          attributes.each do |name, value|
-            send("#{name}=", value)
-          end
-        end
-        #####
-      end
-
       @subject = ProtectedRecord::UseCase::ChangeFilter::Create
 
       @protected_record = TestCase.new(knowledge: "power", power: "money")
