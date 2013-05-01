@@ -1,5 +1,4 @@
 require "minitest_helper"
-require "active_record"
 
 describe ProtectedRecord::UseCase::Update do
   before do
@@ -25,13 +24,18 @@ describe ProtectedRecord::UseCase::Update do
   end
 
   it "fails without required dependencies" do
-    %w{ user params protected_record protected_keys }.each do |dep|
+    %w{ user params protected_record }.each do |dep|
       begin
         @subject.new @dependencies.reject { |k| k.to_s == dep }
       rescue => e
         e.must_be_kind_of RuntimeError
       end
     end
+  end
+
+  it "initializes without :protected_keys" do
+    so = @subject.new @dependencies.reject { |k| k.to_s == "protected_keys" }
+    so.must_respond_to :execute!
   end
 
   it "can be executed" do
