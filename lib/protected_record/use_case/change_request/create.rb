@@ -1,7 +1,8 @@
 module ProtectedRecord
   module UseCase
     module ChangeRequest
-      class Create < PayDirt::Base
+      class Create
+        include PayDirt::UseCase
         def initialize(options)
           options = {
             record_class: ::ProtectedRecord::ChangeRequest::Record

@@ -1,7 +1,8 @@
 module ProtectedRecord
   module UseCase
     module ChangeFilter
-      class Create < PayDirt::Base
+      class Create
+        include PayDirt::UseCase
         def initialize(options)
           load_options(:protected_record, options)
           validate_state

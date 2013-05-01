@@ -3,7 +3,8 @@ require "json"
 module ProtectedRecord
   module UseCase
     module ChangeLog
-      class Create < PayDirt::Base
+      class Create
+        include PayDirt::UseCase
         def initialize(options)
           options = {
             record_class: ::ProtectedRecord::ChangeLog::Record

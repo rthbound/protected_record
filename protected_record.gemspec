@@ -9,18 +9,25 @@ Gem::Specification.new do |s|
   s.email       = ["tad.hosford@gmail.com"]
   s.homepage    = "http://github.com/rthbound/protected_record"
   s.description = %q{
-                      Filters changes & logs changes to protected records.
-                      Creates change requests when changes are attempted on protected attrs
+                      Change filter, change log, and change request system. No callbacks.
                     }
-  s.summary     = %q{  }
+  s.summary     = %q{
+                      Opt in to use #attributes= and ActiveModel::Dirty
+                      to filter changes to certain keys, to log change requests,
+                      ant to log changes to any protected record.
+
+                      Built modularly so you can use the pieces independently
+                      if you like.
+                    }
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_runtime_dependency     "pay_dirt"
-  s.add_runtime_dependency "activerecord"
+  s.add_runtime_dependency     "pay_dirt",     "~> 0.0.5"
+  s.add_runtime_dependency     "activerecord"
+
   s.add_development_dependency "minitest"
   s.add_development_dependency "rake"
   s.add_development_dependency "pry"

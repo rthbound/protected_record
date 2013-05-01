@@ -63,7 +63,7 @@ Rejected changes will create `ProtectedRecord::ChangeRequest::Record` objects.
 Permitted changes will create `ProtectedRecord::ChangeLog::Record` objects.
 
 ```ruby
-ready = ProtectedRecord::UseCase::Update.new({
+ready = ProtectedRecord::Update.new({
   user:             current_user,
   params:           record_params,
   protected_record: @record,

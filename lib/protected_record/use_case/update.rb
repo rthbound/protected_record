@@ -1,6 +1,7 @@
 module ProtectedRecord
   module UseCase
-    class Update < PayDirt::Base
+    class Update
+      include PayDirt::UseCase
       def initialize(options)
         # Defaults
         options = {
@@ -18,11 +19,14 @@ module ProtectedRecord
 
         # We are successful if all changes have been applied
         if !@protected_record.changes.present?
-          return PayDirt::Result.new(data: { updated: @protected_record }, success: true)
+          return PayDirt::Result.new({
+            data:    { updated: @protected_record },
+            success:   true
+          })
         else
           return PayDirt::Result.new({
-            data: { remaining_changes: @protected_record.changes },
-            success: false
+            data:    { failed: @protected_record.changes },
+            success:   false
           })
         end
       end
@@ -31,18 +35,15 @@ module ProtectedRecord
       def form_change_request
         @protected_record.attributes = @params
 
-        # We allow any changes on creation
-        unless @protected_record.id_was.nil?
-          request_result = @change_request.new({
-            protected_keys: @protected_keys,
-            protected_record: @protected_record,
-            user: @user
-          }).execute!
+        request_result = @change_request.new({
+          protected_keys:   @protected_keys,
+          protected_record: @protected_record,
+          user:             @user
+        }).execute!
 
-          if request_result.successful?
-            revert_protected_attributes ||
-            save_protected_record
-          end
+        if request_result.successful?
+          revert_protected_attributes ||
+          save_protected_record
         end
       end
 

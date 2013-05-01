@@ -1,8 +1,8 @@
 require "minitest_helper"
 
-describe ProtectedRecord::Update do
+describe ProtectedRecord::UseCase::Update do
   before do
-    @subject = ProtectedRecord::Update
+    @subject = ProtectedRecord::UseCase::Update
 
     @params = { params: {
       knowledge: "bad",
