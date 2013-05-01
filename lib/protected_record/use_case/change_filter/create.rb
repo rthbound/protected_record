@@ -3,7 +3,8 @@ module ProtectedRecord
     module ChangeFilter
       class Create < PayDirt::Base
         def initialize(options)
-          load_options(:protected_keys, :protected_record, options)
+          load_options(:protected_record, options)
+          validate_state
         end
 
         def execute!
@@ -19,6 +20,17 @@ module ProtectedRecord
           @protected_keys.each do |key|
             if @protected_record.send("#{key.to_s}_changed?")
               @protected_record.send("#{key.to_s}=", @protected_record.send("#{key.to_s}_was"))
+            end
+          end
+        end
+
+        protected
+        def validate_state
+          if !@protected_keys.kind_of?(Array)
+            if @protected_record.respond_to? :protected_keys
+              @protected_keys = @protected_record.protected_keys
+            else
+              @protected_keys = []
             end
           end
         end

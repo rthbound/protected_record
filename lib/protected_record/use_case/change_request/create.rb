@@ -7,7 +7,8 @@ module ProtectedRecord
             record_class: ::ProtectedRecord::ChangeRequest::Record
           }.merge!(options) if !options.has_key?(:record_class)
 
-          load_options(:protected_keys, :record_class, :user, :protected_record, options)
+          load_options(:record_class, :user, :protected_record, options)
+          validate_state
         end
 
         def execute!
@@ -44,6 +45,17 @@ module ProtectedRecord
           end
 
           raise if @protected_keys.any? { |key| @protected_record.send("#{key}_changed?") }
+        end
+
+        protected
+        def validate_state
+          if !@protected_keys.kind_of?(Array)
+            if @protected_record.respond_to? :protected_keys
+              @protected_keys = @protected_record.protected_keys
+            else
+              @protected_keys = []
+            end
+          end
         end
       end
     end

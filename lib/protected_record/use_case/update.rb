@@ -9,7 +9,7 @@ module ProtectedRecord
           change_log:     UseCase::ChangeLog::Create
         }.merge!(options)
 
-        load_options(:params, :protected_record, :change_request, :change_log, :change_filter, :protected_keys, :user, options)
+        load_options(:params, :protected_record, :change_request, :change_log, :change_filter, :user, options)
         validate_state
       end
 
@@ -70,7 +70,11 @@ module ProtectedRecord
       def validate_state
         # We expect some keys
         if !@protected_keys.kind_of?(Array)
-          raise TypeError.new(':protected_keys not kind of Array')
+          if @protected_record.respond_to? :protected_keys
+            @protected_keys = @protected_record.protected_keys
+          else
+            @protected_keys = []
+          end
         end
 
         # The keys should respond to to_s
