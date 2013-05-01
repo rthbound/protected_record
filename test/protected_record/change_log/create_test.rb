@@ -1,5 +1,4 @@
 require "minitest_helper"
-require "active_record"
 
 describe ProtectedRecord::UseCase::ChangeLog::Create do
   describe "new" do

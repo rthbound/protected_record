@@ -30,6 +30,22 @@ include ProtectedRecord::ChangeRequest::Changeling
 include ProtectedRecord::ChangeLog::Changeling
 ```
 
+#### Protected Keys
+
+You have two options,
+
+1. Inject the `:protected_keys` option when you execute the update (this will always take precedence)
+2. Include in your record class `ProtectedRecord::DirtyModel` and define them there:
+
+```ruby
+class SomeRecord < ActiveRecord::Base
+  include ProtectedRecord::DirtyModel
+  protected_keys :do_not_resuscitate, :organ_donor
+end
+```
+
+If you fail to specify either option, ProtectedRecord will use an empty array.
+
 ## Usage
 
 1. protected_record will prevent changes to attributes you specify as protected.
