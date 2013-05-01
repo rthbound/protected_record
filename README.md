@@ -17,7 +17,7 @@ There's **two types** of models at play here:
 
 ```ruby
 # app/models/user.rb
-include ProtectedRecord::User
+include ProtectedRecord::ResponsibleUser
 # includes ProtectedRecord::ChangeRequest::Changer
 #        & ProtectedRecord::ChangeLog::Changer
 ```
