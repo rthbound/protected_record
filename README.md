@@ -44,7 +44,7 @@ class SomeRecord < ActiveRecord::Base
 end
 ```
 
-If you fail to specify either option, ProtectedRecord will use an empty array.
+If you do not specify either option, ProtectedRecord will use an empty array.
 
 ## Usage
 
