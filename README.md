@@ -19,15 +19,16 @@ So, in your models add `require "protected_record"`
 
 ```ruby
 # app/models/user.rb
-include ProtectedRecord::ChangeRequest::Changer
-include ProtectedRecord::ChangeLog::Changer
+include ProtectedRecord::User
+# includes ProtectedRecord::ChangeRequest::Changer
+#        & ProtectedRecord::ChangeLog::Changer
 ```
 
 ```ruby
 # app/models/any.rb
-
-include ProtectedRecord::ChangeRequest::Changeling
-include ProtectedRecord::ChangeLog::Changeling
+include ProtectedRecord::Record
+# includes ProtectedRecord::ChangeRequest::Changeling
+#        & ProtectedRecord::ChangeLog::Changeling
 ```
 
 #### Protected Keys
