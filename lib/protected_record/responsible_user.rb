@@ -1,5 +1,5 @@
 module ProtectedRecord
-  module User
+  module ChangeUser
     def self.included(base)
       base.send :include, ProtectedRecord::ChangeLog::Changer
       base.send :include, ProtectedRecord::ChangeRequest::Changer
