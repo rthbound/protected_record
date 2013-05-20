@@ -20,7 +20,10 @@ module ProtectedRecord
         # We are successful if all changes have been applied
         if !@protected_record.changes.present?
           return PayDirt::Result.new({
-            data:    { updated: @protected_record },
+            data:    {
+              updated: @protected_record,
+              change_request: @change_request_record
+            },
             success:   true
           })
         else
@@ -42,7 +45,8 @@ module ProtectedRecord
         }).execute!
 
         if request_result.successful?
-          revert_protected_attributes ||
+          @change_request_record = request_result.data[:change_request_record]
+          revert_protected_attributes
           save_protected_record
         end
       end
