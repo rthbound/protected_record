@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_runtime_dependency     "pay_dirt",     "~> 0.0.5"
+  s.add_runtime_dependency     "activerecord"
 
   s.add_development_dependency "minitest"
   s.add_development_dependency "rake"
