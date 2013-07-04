@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency     "pay_dirt",     "~> 1.0.0"
   s.add_runtime_dependency     "activerecord"
 
+  s.add_development_dependency "coveralls"
   s.add_development_dependency "minitest"
   s.add_development_dependency "rake"
   s.add_development_dependency "pry"

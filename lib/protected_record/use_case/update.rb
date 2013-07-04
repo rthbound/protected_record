@@ -7,7 +7,9 @@ module ProtectedRecord
         options = {
           change_request: UseCase::ChangeRequest::Create,
           change_filter:  UseCase::ChangeFilter::Create,
-          change_log:     UseCase::ChangeLog::Create
+          change_log:     UseCase::ChangeLog::Create,
+          change_request_record_class: ::ProtectedRecord::ChangeRequest::Record,
+          change_log_record_class: ::ProtectedRecord::ChangeLog::Record
         }.merge!(options)
 
         load_options(:params, :protected_record, :change_request, :change_log, :change_filter, :user, options)
@@ -39,6 +41,7 @@ module ProtectedRecord
         @protected_record.attributes = @params
 
         request_result = @change_request.new({
+          record_class:     @change_request_record_class,
           protected_keys:   @protected_keys,
           protected_record: @protected_record,
           user:             @user
@@ -66,7 +69,11 @@ module ProtectedRecord
       end
 
       def log_changes
-        log_result = @change_log.new(user: @user, changed_object: @protected_record).execute!
+        log_result = @change_log.new({
+          user: @user,
+          changed_object: @protected_record,
+          record_class: @change_log_record_class
+        }).execute!
 
         log_result.successful? ? return : raise
       end

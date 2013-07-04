@@ -1,4 +1,6 @@
 # Testing frameworks
+require 'coveralls'
+Coveralls.wear!
 require "minitest/autorun"
 
 # Debugger
