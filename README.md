@@ -47,13 +47,13 @@ class SomeRecord < ActiveRecord::Base
 end
 ```
 
-Your third option is to omit `:protected_keys` entirely.
+3. Your third option is to omit `:protected_keys` entirely.
 If they are not specified using either method, ProtectedRecord will use an empty array.
 
 ## Usage & Function
 
 1. protected_record will prevent changes to attributes you specify as protected.
-2. Any attempted change will be logged as a
+2. Any attempted but prevented change will be logged as a
    `ProtectedRecord::ChangeRequest::Record`.
 3. If any changes are allowed through the filter, protected_record
    will create a `ProtectedRecord::ChangeLog::Record` to log who changed what,
@@ -91,6 +91,12 @@ and
 @user.change_request_records
 @some_record.change_request_records
 ```
+
+## Recent Changes
+Okay, so not so recent. Rails 4 removed attr_accessible, which this gem was using.
+The only change to the end user should be the need to whitelist any params using
+[strong_parameters](https://github.com/rails/strong_parameters). Since this is technically
+a breaking change, it's time to bump protected_record to v1.0.0.
 
 ## Contributing
 

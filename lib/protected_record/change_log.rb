@@ -3,7 +3,6 @@ module ProtectedRecord
   module ChangeLog
     class Record < ActiveRecord::Base
       self.table_name = "protected_record_change_log_records"
-      attr_accessible :recordable, :user
       belongs_to :recordable, polymorphic: true
       belongs_to :user, class_name: "User", foreign_key: :user_id
     end
