@@ -5,9 +5,10 @@ matrix:
     - rvm: ruby-head
 
 rvm:
+  - 2.3.0
+  - 2.2.4
+  - 2.1.8
   - 2.0.0
-  - 1.9.3
-  - 1.9.2
   - ruby-head
 
 script: bundle exec rake test
