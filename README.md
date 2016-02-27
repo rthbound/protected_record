@@ -1,4 +1,4 @@
-# protected_record [![Gem Version](https://badge.fury.io/rb/protected_record.png)](http://badge.fury.io/rb/protected_record)[![Build Status](https://travis-ci.org/rthbound/protected_record.png?branch=master)](https://travis-ci.org/rthbound/protected_record)[![Code Climate](https://codeclimate.com/github/rthbound/protected_record.png)](https://codeclimate.com/github/rthbound/protected_record)
+# protected_record [![Gem Version](https://badge.fury.io/rb/protected_record.png)](http://badge.fury.io/rb/protected_record)[![Build Status](https://travis-ci.org/rthbound/protected_record.png?branch=master)](https://travis-ci.org/rthbound/protected_record)[![Code Climate](https://codeclimate.com/github/rthbound/protected_record.png)](https://codeclimate.com/github/rthbound/protected_record)[![Coverage Status](https://coveralls.io/repos/github/rthbound/protected_record/badge.svg?branch=master)](https://coveralls.io/github/rthbound/protected_record?branch=master)
 
 ## Setup for rails applications
 
